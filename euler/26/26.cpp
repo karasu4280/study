@@ -8,9 +8,9 @@ int main (){
 
   for(int i = 3;i < 1000;i = i+2){
     int tmp = 1,key = 0,a,b;
-    vector<int> s(1000,0);
+    vector<int> s(20000,0);
     vector<int> l(10,0);
-    for(int k = 0;k < 1000;k++){
+    for(int k = 0;k < 20000;k++){
       if(tmp >= i){
         b = 0;
         do{
@@ -37,7 +37,7 @@ int main (){
           break;
         }
       }
-      if(k > 50){
+      if(k > 16000){
         if(key == 0){
           int c = 0;
           for(int m = 0;m < 10;m++){
@@ -64,6 +64,8 @@ int main (){
     cout << endl;*/
   }
   cout << ans << endl;
-  //cout << max <<endl;
+  cout << max <<endl;
   return 0;
 }
+
+/*1ru-pu hukusuu no suuzi syori dekinai*/
