@@ -4,11 +4,10 @@ using namespace std;
 
 
 int main (){
-  int n,tmp;
+  int n;
   cin >> n;
   vector<int> t(n,0);
-  vector<long long int> rui(n,0);
-  long long int sumall = 0,sum1 = 0,min = 1000000000,max;
+  long long int sumall = 0,ming = 100000;
 
   for(int i = 0;i < n;i++){
     cin >> t[i];
@@ -17,45 +16,34 @@ int main (){
 
   sort(t.begin(),t.end());
 
-  /*for(int i = 0;i < n;i++){
-    cout << t[i] << endl;
-    cout << rui[i] << endl;
+  vector<vector<long long int>> dp(n,vector<long long int>(sumall,0));
+
+  for(int i = t[0];i < sumall;i++){
+    dp[0][i] = t[0];
   }
-  return 0;*/
 
-
-  long long int keep;
-  for(int bit = 0;bit < (1 << n);bit++){
-    long long int sum = 0;
-    for(int i = 0;i < n;i++){
-      if(bit & (1 << i)){
-        sum += t[i];
+  for(int i = 1;i < n;i++){
+    for(int k = 1;k < sumall;k++){
+      if(t[i] <= k){
+        dp[i][k] = max(dp[i-1][k-t[i]]+t[i],dp[i-1][k]);
+      }else{
+        dp[i][k] = dp[i-1][k];
       }
     }
-    sum1 = sumall - sum;
+  }
 
-    if(abs(sum-sum1) < min){
-      min = abs(sum-sum1);
-      keep = bit;
+  for(int i = 0;i < sumall;i++){
+    cout << dp[n-1][i] << " ";
+  }
+  return 0;
+
+  for(int i = 1;i < sumall;i++){
+    long long int sum1 = sumall;
+    if(max(sum1-dp[n-1][i],dp[n-1][i]) < ming){
+      ming = max(sum1-dp[n-1][i],dp[n-1][i]);
     }
-  }
-
-  long long int sum = 0;
-  for(int i = 0;i < n;i++){
-    if(keep & (1 << i)){
-      sum += t[i];
-    }
-  }
-  sum1 = sum;
-  sumall -= sum;
-
-  if(sumall >= sum1){
-    max = sumall;
-  }else{
-    max = sum1;
-  }
-
-  cout << max << endl;
+  }  
+  cout << ming << endl;
   return 0;
 
 }
