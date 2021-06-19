@@ -32,10 +32,10 @@ int main (){
     }
   }
 
-  for(int i = 0;i < sumall;i++){
+  /*for(int i = 0;i < sumall;i++){
     cout << dp[n-1][i] << " ";
   }
-  return 0;
+  return 0;*/
 
   for(int i = 1;i < sumall;i++){
     long long int sum1 = sumall;
